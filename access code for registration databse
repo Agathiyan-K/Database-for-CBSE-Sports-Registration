@@ -1,0 +1,32 @@
+create user 'SchoolManager'@'localhost' identified by '123456';
+create user 'EventCoordinator'@'localhost' identified by '234567';
+create user 'Observer'@'localhost' identified by '345678';
+create user 'Accountant'@'localhost' identified by '456789';
+create user 'DataEntryClerk'@'localhost' identified by '567890';
+
+-- Grant permissions to SchoolManager
+GRANT SELECT, INSERT, UPDATE, DELETE ON registration.School TO 'SchoolManager'@'localhost';
+GRANT SELECT ON Student TO SchoolManager;
+
+-- Grant permissions to EventCoordinator
+GRANT SELECT, INSERT, UPDATE, DELETE ON registration.Event TO 'EventCoordinator'@'localhost';
+GRANT SELECT, INSERT ON registration.Participation TO 'EventCoordinator'@'localhost';
+GRANT SELECT ON registration.Team TO 'EventCoordinator'@'localhost';
+
+-- Grant permissions to Observer
+GRANT SELECT, INSERT, UPDATE ON registration.ObserverReport TO 'Observer'@'localhost';
+
+-- Grant permissions to Accountant
+GRANT SELECT, INSERT, UPDATE ON registration.IncomeExpenditure TO 'Accountant'@'localhost';
+
+-- Grant permissions to DataEntryClerk
+GRANT SELECT, INSERT ON registration.Student TO 'DataEntryClerk'@'localhost';
+GRANT SELECT, INSERT ON registration.Participation TO 'DataEntryClerk'@'localhost';
+GRANT SELECT, INSERT ON registration.Team TO 'DataEntryClerk'@'localhost';
+
+-- Revoke permissions from a role
+-- REVOKE INSERT ON Student FROM DataEntryClerk;
+
+-- Revoke a role from a user
+-- REVOKE SchoolManager FROM 'SchoolManager'@'localhost';
+
